@@ -1,0 +1,97 @@
+Reactive thymeleaf configuration
+
+if you install webflux then spring boot will automatically configure reactive thymeleaf.
+
+if you install springmvc / spring boot starter web also spring boot will automatically configure reactive thymeleaf.
+
+-----------------------------------
+
+Going Reactive with thymeleaf
+
+now we will give thymeleaf flux or reactive types. instead of list
+
+Editing index controller
+-----------------------------------
+
+Refactor recipe and Ingredient controller
+removing .block() in add attributes
+
+----------------------------------
+
+Binding Validation *****
+
+adding validation to recipe controller using webdatabinder
+
+-----------------------------------
+
+Update binding validation for ingredientcontroller *******
+
+added validation in ingredient controller
+
+using webdatabinder
+
+also see the ingredientform to know how errors are beign displayed
+-----------------------------------
+
+Common Model Attributes(for both web flux and spring mvc)
+
+made this
+@ModelAttribute("uomList")
+    public Flux<UnitOfMeasureCommand> populateUomList()
+
+this will call this function anytime view layer is called from controller
+
+------------------------------------
+
+WebFlux Exception Handling(only for Webflux)
+
+in recipeController
+
+ @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleNotFound(Exception exc, Model model) {
+    }
+ added this which handle exception in RecipeController
+
+ @ExceptionHandler({NotFoundException.class, TemplateInputException.class})
+ added TemplateInputException for handeling TemplateInputException
+
+------------------------------------
+
+WebFlux Controller Advice
+
+creating custom exceptions
+here in recipe update if we put char in recptime it will throw an error page telling responseStatusExceptionHandeler
+
+if we debug and put a breakpoint on responseStatusExceptionHandeler we will find it throws WebExchangeBindException
+
+now implement the exception for WebExchangeBindException.class in controller ExceptionHandler
+
+------------------------------------
+
+Multi part upload
+
+------------------------------------
+
+Router Functions
+
+this help in creating a rest API
+
+we create a config folder and inside it create WebConfig.java
+
+We label the class as @configuration
+
+now go and se the onenote picture in this we are creating a json response (api) for listing all recipes
+
+-----------------------------------------
+
+DONE WEBFLUX COMPLETED
+
+
+
+
+
+
+
+
+
